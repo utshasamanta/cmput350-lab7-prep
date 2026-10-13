@@ -1,7 +1,22 @@
 Hash table:
+The memory cost is proportional to the number of components that exist, but the
+table also needs buckets and linked nodes. Access is O(1) on average, but hashing
+and pointer chasing have larger constant costs and poor cache locality. Adding and
+removing entries is simple, although rehashing may sometimes be required.
 
 Map:
+The memory cost is proportional to the number of components that exist, but each
+tree node stores extra pointers. Access is O(log N) and pointer chasing has poor
+cache locality. Adding and removing entries is simple and also takes O(log N).
 
 Sparse mapping 1:
+The memory cost is O(NK), even when most entities have few components. Access is
+O(1), and looking up all component types for one entity is cache-friendly. Adding
+an entity adds one array of K entries, while removing or renumbering entities can
+require updating the vector.
 
 Sparse mapping 2:
+The memory cost is also O(NK), even when most entries are -1. Access is O(1), and
+looking up one component type for many nearby entities is cache-friendly. Adding
+or removing a component type is difficult because K is fixed at compile time;
+adding an entity requires adding one entry to every component vector.
